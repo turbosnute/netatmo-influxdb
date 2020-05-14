@@ -4,7 +4,7 @@ while :
 do
   date
   echo "--- Start Call API"
-  python netatmo2influxdb.py
+  python3 netatmo2influxdb.py
   RET=$?
   if [ ${RET} -ne 0 ];
   then
