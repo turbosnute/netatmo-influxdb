@@ -49,7 +49,7 @@ def send_data(ds):
         senddata["measurement"]=key
         senddata["time"]=datetime.datetime.fromtimestamp(dd['time_utc']).strftime("%Y-%m-%dT%H:%M:%S")
         if debug:
-            print senddata["time"]
+            print (senddata["time"])
         senddata["tags"]={}
         senddata["tags"]["host"]=ds['_id']
         if key in keylist:
@@ -57,26 +57,26 @@ def send_data(ds):
         senddata["fields"]={}
         senddata["fields"]["value"]=dd[key]
         if debug:
-            print json.dumps(senddata,indent=4)
+            print (json.dumps(senddata,indent=4))
         client.write_points([senddata])
 
 for name in devList.modulesNamesList():
     if debug:
-        print "--- module"
-        print name
+        print ("--- module")
+        print (name)
     ds=devList.moduleByName(name)
     if ds is None:
         continue
     if not 'dashboard_data' in ds:
         continue
     if debug:
-        print ds['_id']
+        print (ds['_id'])
     send_data(ds)
 
 for station_id in devList.stations:
     if debug:
-        print "--- station"
-        print station_id
+        print ("--- station")
+        print (station_id)
     ds=devList.stationById(station_id)
     if ds is None:
         continue
@@ -84,8 +84,8 @@ for station_id in devList.stations:
         continue
     if debug:
         if 'station_name' in ds:
-            print ds['station_name']
+            print (ds['station_name'])
         else:
-            print station_id
-        print ds['_id']
+            print (station_id)
+        print (ds['_id'])
     send_data(ds)
