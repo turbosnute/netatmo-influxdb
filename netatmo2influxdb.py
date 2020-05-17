@@ -19,7 +19,10 @@ netatmo_clientId=os.getenv('NETATMO_CLIENT_ID', "")
 netatmo_clientSecret=os.getenv('NETATMO_CLIENT_SECRET', "")
 netatmo_username=os.getenv('NETATMO_USERNAME')
 netatmo_password=os.getenv('NETATMO_PASSWORD')
+<<<<<<< HEAD
 # influx env variables
+=======
+>>>>>>> 24fd573ec1ace73c95e7efde1d80e7624b6224d6
 influxdb_host=os.getenv('INFLUXDB_HOST', "localhost")
 influxdb_port=int(os.getenv('INFLUXDB_PORT', "8086"))
 influxdb_username=os.getenv('INFLUXDB_USERNAME', "root")
