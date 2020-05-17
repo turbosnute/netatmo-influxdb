@@ -45,3 +45,10 @@ To get more debug data add:
 ```
  -e DEBUG="true"
 ```
+
+## Measure Air Quality (Norway Only)
+If you want to get data about air quality in your neighborhood from Norsk institutt for luftforskning (nilu.no). Add the following variables and change the coordinates to match your location:
+```
+ -e AIRQUALITY_LATITUDE="63.426916" \
+ -e AIRQUALITY_LONGITUDE="10.396859" \
+```

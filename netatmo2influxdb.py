@@ -8,6 +8,7 @@ import json
 import lnetatmo
 import os
 import sys
+import requests
 
 #
 debug_str=os.getenv("DEBUG", "False")
@@ -18,12 +19,15 @@ netatmo_clientId=os.getenv('NETATMO_CLIENT_ID', "")
 netatmo_clientSecret=os.getenv('NETATMO_CLIENT_SECRET', "")
 netatmo_username=os.getenv('NETATMO_USERNAME')
 netatmo_password=os.getenv('NETATMO_PASSWORD')
-#
+# influx env variables
 influxdb_host=os.getenv('INFLUXDB_HOST', "localhost")
 influxdb_port=int(os.getenv('INFLUXDB_PORT', "8086"))
 influxdb_username=os.getenv('INFLUXDB_USERNAME', "root")
 influxdb_password=os.getenv('INFLUXDB_PASSWORD', "root")
 influxdb_database=os.getenv('INFLUXDB_DATABASE', "netatmo")
+# Luftkvalitet (Norwegian Air Quality
+airLat=os.getenv('AIRQUALITY_LATITUDE', None)
+airLon=os.getenv('AIRQUALITY_LONGITUDE', None)
 
 # netatmo
 authorization = lnetatmo.ClientAuth(clientId=netatmo_clientId,
@@ -57,7 +61,7 @@ def send_data(ds):
         senddata["fields"]={}
         senddata["fields"]["value"]=dd[key]
         if debug:
-            print (json.dumps(senddata,indent=4))
+             print (json.dumps(senddata,indent=4))
         client.write_points([senddata])
 
 for name in devList.modulesNamesList():
@@ -89,3 +93,32 @@ for station_id in devList.stations:
             print (station_id)
         print (ds['_id'])
     send_data(ds)
+
+#
+# Air Quality (Norway)
+#
+if airLat is not None and airLon is not None:
+  airUri = f"https://api.nilu.no/aq/utd/{airLat}/{airLon}/3"
+  response = requests.get(airUri)
+
+  if response.status_code == 200:
+    for airdata in response.json():
+       station = airdata['station']
+       component = airdata['component']
+       airvalue = airdata['value']
+       output = [
+       {
+          "measurement": "airquality",
+          "tags": {
+              "station": station,
+              "component": component
+          },
+          "fields": {
+              "value": airvalue
+          }
+       }
+       ]
+       print(output)
+       client.write_points(output)
+  else:
+       print("error getting air quality")
