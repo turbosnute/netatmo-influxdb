@@ -21,8 +21,20 @@ $ docker run -d -p 8086:8086 \
 ```
 
 ### Create Dabatase
+#### Curl method
 ```
-$ curl -G http://<INFLUXDB_SERVER:8086/query --data-urlencode "q=CREATE DATABASE mydb"
+$ curl -G http://<INFLUXDB_SERVER>:8086/query --data-urlencode "q=CREATE DATABASE netatmo"
+```
+#### Console Method
+```
+ docker run -d -p 8086:8086 \
+      -v influxdb:/var/lib/influxdb \
+      influxdb /bin/bash
+
+Container#> influx
+> CREATE DATABASE netatmo
+> exit
+
 ```
 ## How to run
 ```
