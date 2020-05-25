@@ -11,7 +11,7 @@ import sys
 import requests
 
 #
-debug_str=os.getenv("DEBUG", "False")
+debug_str=os.getenv("DEBUG", None)
 debug = debug_str.lower() == "true"
 
 # settings from EnvionmentValue
@@ -120,7 +120,9 @@ if airLat is not None and airLon is not None:
           }
        }
        ]
-       print(output)
+       if debug:
+         print(output)
+
        client.write_points(output)
   else:
        print("error getting air quality")
