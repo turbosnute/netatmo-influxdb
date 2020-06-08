@@ -12,7 +12,10 @@ import requests
 
 #
 debug_str=os.getenv("DEBUG", None)
-debug = debug_str.lower() == "true"
+if debug_str is not None:
+  debug = debug_str.lower() == "true"
+else:
+  debug = False
 
 # settings from EnvionmentValue
 netatmo_clientId=os.getenv('NETATMO_CLIENT_ID', "")
