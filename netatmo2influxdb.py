@@ -45,7 +45,7 @@ client = InfluxDBClient(influxdb_host,
                      influxdb_database)
 
 # these keys are float
-keylist=['Temperature', 'min_temp', 'max_temp', 'Pressure','AbsolutePressure']
+keylist=['Temperature', 'min_temp', 'max_temp', 'Pressure', 'AbsolutePressure', 'Rain', 'sum_rain_24', 'sum_rain_1']
 
 def send_data(ds):
     #
