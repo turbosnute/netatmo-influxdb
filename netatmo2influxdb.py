@@ -61,6 +61,7 @@ def send_data(ds):
             print (senddata["time"])
         senddata["tags"]={}
         senddata["tags"]["host"]=ds['_id']
+        senddata["tags"]["module"]=ds['module_name']
         if key in keylist:
             dd[key]=float(dd[key])
         senddata["fields"]={}
