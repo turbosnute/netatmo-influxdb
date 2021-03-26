@@ -1,7 +1,7 @@
 ARG ARCH=
 
 # Pull base image
-FROM ubuntu:latest
+FROM ubuntu:18.04
 
 # Labels
 LABEL MAINTAINER="Øyvind Nilsen <oyvind.nilsen@gmail.com>"
