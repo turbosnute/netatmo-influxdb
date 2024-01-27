@@ -1,4 +1,9 @@
 # netatmo-influxdb
+
+Unfortunately I have not fixed the autentication process after Netatmo changed it (see the open issue. Feel free to pull request a solution), so at the moment this container will not work.
+
+
+
 Fetch data from the Netatmo API and place it in your influxdb. Based on Manabuishii's [docker-netatmo-influxdb-python](https://github.com/manabuishii/docker-netatmo-influxdb-python) and [netatmo2influxdb.py](https://pypi.org/project/netatmo2influxdb/).
 
 ## How to obtain Netatmo API Token
