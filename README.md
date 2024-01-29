@@ -1,6 +1,8 @@
 # netatmo-influxdb
 
-Unfortunately I have not fixed the autentication process after Netatmo changed it (see the open issue. Feel free to pull request a solution), so at the moment this container will not work.
+## Unfortunately I have not fixed the autentication process after Netatmo changed it (see the open issue. Feel free to pull request a solution), so at the moment this container will not work.
+This should not be super hard to fix, but I'm prioritizing another project (rewriting this whole thing in php+powershell) at the moment.
+If someone want to fix this issue, the trick is to make the script use a access token directly (can be generated in dev.netatmo.com).
 
 
 
